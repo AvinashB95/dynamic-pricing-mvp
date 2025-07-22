@@ -1,3 +1,4 @@
+![alt text](image-1.png)
 Dynamic Product Pricing MVP
 This project implements a Minimum Viable Product (MVP) for a dynamic product pricing system for a B2B e-commerce platform. The solution is built using Apache Spark and Delta Lake within a Databricks environment, demonstrating key data engineering concepts including multi-layered data lake architecture, data transformation, and feature engineering.
 
