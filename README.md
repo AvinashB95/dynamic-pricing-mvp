@@ -88,9 +88,9 @@ Key components of this module include:
 
 ### Setup Instructions
 
-1. Place your shipping and sales transaction CSV file (`Amazon Sale Report.csv`) in a `/data` folder accessible to the environment (local filesystem or DBFS).
+1. Place your shipping and sales transaction CSV file (`Amazon Sale Report.csv`) in a `/data` folder accessible to the environment (local filesystem).
 
-2. Ensure dependencies listed in [`requirements.txt`](./requirements.txt) are installed if running locally; on Databricks, most dependencies are pre-installed.
+2. Ensure dependencies listed in [`requirements.txt`](./requirements.txt) are installed as we are running locally.
 
 3. Adjust file paths and volume mounts as needed to match your environment.
 
