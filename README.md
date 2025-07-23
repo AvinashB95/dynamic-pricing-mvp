@@ -66,3 +66,68 @@ Assisting with PySpark DataFrame transformations and complex SQL queries.
 Suggesting best practices for Delta Lake implementation and data pipeline design.
 
 Aiding in debugging and troubleshooting environment-specific errors
+
+
+## Shipping Price Estimation MVP Module
+
+### Overview
+
+This module implements a shipping price estimation prototype intended to complement the Dynamic Pricing MVP by estimating shipping costs based on product dimensions, weight, distance, and margin-aware logic.
+
+Key components of this module include:
+
+- **Data ingestion and cleaning**: Loads raw sales/shipping data and performs schema normalization and cleansing such as renaming columns to snake_case and filtering invalid/irrelevant records.
+
+- **Product dimension simulation**: Since raw data lacks detailed product dimensional attributes, this module simulates product weight, length, width, and height based on product categories to enable volumetric and weight-based shipping calculations.
+
+- **Shipping zone assignment**: Based on customer postal codes and/or states, each order is assigned a shipping zone to apply zone-specific shipping rates.
+
+- **Shipping cost estimation**: Calculates total shipment weight and volume, applies zone-based shipping cost rates combined with margin-aware business rules (e.g., free shipping eligibility above margin thresholds), and suggests dynamic shipping prices.
+
+- **Scalable prototype built with PySpark**: Designed for local Spark or Databricks environment, using Parquet format for intermediate and final dataset persistence.
+
+### Setup Instructions
+
+1. Place your shipping and sales transaction CSV file (`Amazon Sale Report.csv`) in a `/data` folder accessible to the environment (local filesystem or DBFS).
+
+2. Ensure dependencies listed in [`requirements.txt`](./requirements.txt) are installed if running locally; on Databricks, most dependencies are pre-installed.
+
+3. Adjust file paths and volume mounts as needed to match your environment.
+
+### How to Run
+
+- Run the `shipping_price_estimation_mvp.ipynb` notebook or equivalent scripts sequentially:
+  
+  - Load and clean raw data, including column renaming.
+  
+  - Join product sales with simulated dimensions.
+  
+  - Assign shipping zones based on location.
+  
+  - Compute estimated shipping costs with margin-aware adjustments.
+  
+  - Write output to Parquet or Delta Lake for consumption by other modules or reports.
+
+### Implementation Details
+
+- Uses **user-defined mappings** to simulate product weights/dimensions by category where upstream data is missing.
+
+- Applies a **robust data cleaning pipeline** that removes cancelled or zero-quantity orders.
+
+- Modular processing steps facilitate extension to real-world shipping cost APIs or more granular geolocation datasets.
+
+- Designed as a **new independent module**, enabling separate development and scaling from the dynamic pricing MVP.
+
+### AI-Assisted Development
+
+AI assistance tools (e.g., ChatGPT) helped generate column cleaning utilities, PySpark UDF examples, and validate shipping cost calculation logic, accelerating development and ensuring idiomatic Spark usage.
+
+### Future Directions
+
+- Integrate real shipping rate APIs and carrier-specific rules.
+
+- Incorporate real-time geospatial Zip/Postal code distance calculations.
+
+- Add visualization dashboards to monitor shipping cost trends by zone.
+
+- Extend prototype for automated real-time shipping cost updates in product listings.
